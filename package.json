@@ -6,6 +6,13 @@
   "author": "Utku Sarioglu <utkusarioglu@hotmail.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "prettier": "yarn prettier --write 'contract/**/*.sol'",
+    "deploy-geth": "yarn hardhat deploy --network geth",
+    "deploy-goerli": "yarn hardhat deploy --network goerli",
+    "console-geth": "yarn hardhat console --network geth",
+    "console-goerli": "yarn hardhat console --network goerli"
+  },
   "dependencies": {
     "dotenv": "^10.0.0"
   },
