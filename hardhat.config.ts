@@ -1,3 +1,4 @@
+require('dotenv').config();
 import 'hardhat-deploy';
 import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-waffle';
@@ -12,7 +13,6 @@ module.exports = {
     tests: './test',
     cache: './cache',
     artifacts: './artifacts',
-    deploy: './deployments',
   },
 
   networks: {
