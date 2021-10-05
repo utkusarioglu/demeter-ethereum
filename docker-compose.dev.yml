@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  hardhat:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    working_dir: /usr/src/app
+    container_name: demeter-ethereum
+    volumes:
+      - ./:/usr/src/app/ethereum

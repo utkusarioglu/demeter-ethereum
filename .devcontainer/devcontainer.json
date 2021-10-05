@@ -1,0 +1,15 @@
+{
+	"name": "demeter-ethereum",
+	"dockerComposeFile": [
+		"../docker-compose.dev.yml",
+		"docker-compose.yml"
+	],
+	"service": "hardhat",
+	"workspaceFolder": "/workspace",
+	"settings": {
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#050"
+    }
+  },
+	"extensions": []
+}
