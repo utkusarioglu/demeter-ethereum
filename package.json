@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prettier": "yarn prettier --write 'contract/**/*.sol'",
+    "prettify": "yarn prettier --write 'contracts/**/*.sol'",
     "deploy-geth": "yarn hardhat deploy --network geth",
     "deploy-goerli": "yarn hardhat deploy --network goerli",
     "console-geth": "yarn hardhat console --network geth",
