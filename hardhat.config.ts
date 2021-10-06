@@ -7,7 +7,7 @@ import '@typechain/ethers-v5';
 import { task } from 'hardhat/config';
 
 module.exports = {
-  solidity: '0.8.6',
+  solidity: '0.8.9',
   paths: {
     sources: './contracts',
     tests: './test',
