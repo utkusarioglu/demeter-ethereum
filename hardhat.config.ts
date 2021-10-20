@@ -26,10 +26,10 @@ module.exports = {
         '59ce4a71b0785c64992b7317da7185ae32be960c7af0f988ca8b39026779fd85',
       ],
     },
-    goerli: {
+      goerli: {
       url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [`0x${process.env.GOERLI_DEPLOYER_PK}`],
-    },
+      },
   },
 
   namedAccounts: {
@@ -54,10 +54,3 @@ module.exports = {
     alwaysGenerateOverloads: false,
   },
 };
-
-task('accounts', 'Display the list of accounts', async (_, { ethers }) => {
-  const accounts = await ethers.getSigners();
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
