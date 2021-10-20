@@ -9,9 +9,6 @@
       "activityBar.foreground": "#fff"
     }
   },
-  "extensions": [
-    "juanblanco.solidity",
-    "tintinweb.solidity-visual-auditor",
-    "hbenl.vscode-mocha-test-adapter"
-  ]
+  "extensions": ["tintinweb.solidity-visual-auditor", "tanzx97.solidity-lite"],
+  "postStartCommand": "yarn"
 }
