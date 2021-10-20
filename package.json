@@ -7,11 +7,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prettify": "yarn prettier --write 'contracts/**/*.sol'",
-    "deploy-geth": "yarn hardhat deploy --network geth",
-    "deploy-goerli": "yarn hardhat deploy --network goerli",
-    "console-geth": "yarn hardhat console --network geth",
-    "console-goerli": "yarn hardhat console --network goerli"
+    "prettify": "prettier --write 'contracts/**/*.sol'",
+    "deploy-geth": "hardhat deploy --network geth",
+    "deploy-goerli": "hardhat deploy --network goerli",
+    "console-geth": "hardhat console --network geth",
+    "console-goerli": "hardhat console --network goerli",
+    "test": "hardhat typechain && hardhat test"
   },
   "dependencies": {
     "dotenv": "^10.0.0"
