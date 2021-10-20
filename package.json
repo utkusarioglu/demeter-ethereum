@@ -15,11 +15,13 @@
     "test": "hardhat typechain && hardhat test"
   },
   "dependencies": {
+    "@openzeppelin/contracts-upgradeable": "^4.3.2",
     "dotenv": "^10.0.0"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/hardhat-upgrades": "^1.10.0",
     "@typechain/ethers-v5": "^7.1.2",
     "@typechain/hardhat": "^2.3.0",
     "@types/chai": "^4.2.22",
@@ -30,6 +32,10 @@
     "ethers": "^5.4.7",
     "hardhat": "^2.6.4",
     "hardhat-deploy": "^0.9.3",
+    "hardhat-gas-reporter": "^1.0.4",
+    "hardhat-log-remover": "^2.0.2",
+    "hardhat-spdx-license-identifier": "^2.0.3",
+    "hardhat-storage-layout": "^0.1.6",
     "mocha": "^9.1.2",
     "prettier": "^2.4.1",
     "prettier-plugin-solidity": "^1.0.0-beta.18",
