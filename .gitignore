@@ -1,6 +1,11 @@
 node_modules
 *.log
 *.env
+.vscode
+.openzeppelin
 /artifacts
 /cache
 /deployments/geth
+/deployments/localhost
+/storageLayout
+coverage
