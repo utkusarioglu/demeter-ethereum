@@ -1,0 +1,9 @@
+{
+  "extend": "solhint:recommended",
+  "rules": {
+    "func-param-name-mixedcase": "warn",
+    "modifier-name-mixedcase": "warn",
+    "private-vars-leading-underscore": "warn",
+    "ordering": "warn"
+  }
+}
