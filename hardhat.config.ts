@@ -12,9 +12,7 @@ import "./tasks/account-balances";
 import "./tasks/named-accounts";
 import "hardhat-storage-layout";
 import { EnvAccounts } from "./scripts/env-accounts";
-const {
-  INFURA_API_KEY
-} = process.env;
+const { COINMARKETCAP_API_KEY, INFURA_API_KEY } = process.env;
 
 const envAccounts = new EnvAccounts()
   .setEnvPrefix("ACCOUNT_")
@@ -66,6 +64,15 @@ const config = {
     outDir: "artifacts/types",
     target: "ethers-v5",
     alwaysGenerateOverloads: false,
+  },
+  spdxLicenseIdentifier: {
+    overwrite: true,
+    runOnCompile: true,
+  },
+  gasReporter: {
+    enabled: !!COINMARKETCAP_API_KEY,
+    coinmarketcap: COINMARKETCAP_API_KEY,
+    currency: "USD",
   },
 };
 
