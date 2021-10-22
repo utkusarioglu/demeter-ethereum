@@ -1,56 +1,72 @@
-require('dotenv').config();
-import 'hardhat-deploy';
-import '@nomiclabs/hardhat-ethers';
-import '@nomiclabs/hardhat-waffle';
-import '@typechain/hardhat';
-import '@typechain/ethers-v5';
-import { task } from 'hardhat/config';
+require("dotenv").config();
+import "hardhat-gas-reporter";
+import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-waffle";
+import "@typechain/ethers-v5";
+import "@typechain/hardhat";
+import "hardhat-deploy";
+import "hardhat-spdx-license-identifier";
+import "solidity-coverage";
+import "@openzeppelin/hardhat-upgrades";
+import "./tasks/account-balances";
+import "./tasks/named-accounts";
+import "hardhat-storage-layout";
+import { EnvAccounts } from "./scripts/env-accounts";
+const {
+  INFURA_API_KEY
+} = process.env;
 
-module.exports = {
-  solidity: '0.8.9',
+const envAccounts = new EnvAccounts()
+  .setEnvPrefix("ACCOUNT_")
+  .setRequiredAccounts("local_deployer", "local_user1")
+  .setNetworkAlias("local", ["hardhat", "geth"])
+  .parse();
+
+const config = {
+  solidity: "0.8.4",
   paths: {
-    sources: './contracts',
-    tests: './test',
-    cache: './cache',
-    artifacts: './artifacts',
+    sources: "./contracts",
+    tests: "./tests",
+    cache: "./cache",
+    artifacts: "./artifacts",
+  },
+  settings: {
+    optimizer: {
+      enabled: true,
+      runs: 1000,
+    },
   },
 
   networks: {
-    geth: {
-      url: 'http://192.168.1.151:8545',
-      chainId: 1131745,
-      accounts: [
-        'd772f5a4f5c9a41aad02abcc3b3245bb30d566301311a218f91b28dd9b57bb96',
-        '7b3bd76befc7da423df68ca6e65030e631bb2ea99fb958f8b9d772abc909a2a5',
-        'ffe362b740d2c187894fcfb1bbe684b1c1ee4caee6b3478f2e69d78d02f22b34',
-        '59ce4a71b0785c64992b7317da7185ae32be960c7af0f988ca8b39026779fd85',
-      ],
+    hardhat: {
+      accounts: envAccounts
+        .groupArray("local")
+        .map(({ privateKey, balance }) => ({ privateKey, balance })),
     },
+    geth: {
+      url: "http://192.168.1.151:8545",
+      chainId: 1131745,
+      accounts: envAccounts
+        .groupArray("local")
+        .map(({ privateKey }) => privateKey),
+    },
+    ...(envAccounts.hasGroup("goerli") && {
       goerli: {
-      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      accounts: [`0x${process.env.GOERLI_DEPLOYER_PK}`],
+        url: `https://goerli.infura.io/v3/${INFURA_API_KEY}`,
+        accounts: envAccounts
+          .groupArray("goerli")
+          .map(({ privateKey }) => `0x${privateKey}`),
       },
+    }),
   },
 
-  namedAccounts: {
-    deployer: {
-      goerli: '0xaAA2b2b9bbB594409842Ddf15b9bD0bb6BE262d9', //it can also specify a specific network name (specified in hardhat.config.js)
-      geth: '0x7a21917792d1be1986a5e1998bd248A259987f89',
-    },
-    user1: {
-      geth: '0x87453d4882f3f84912cf4FfF851674C517135fD1',
-    },
-    user2: {
-      geth: '0xd9FF26d1b97d3f2e942D026645332336cBb27bda',
-    },
-    user3: {
-      geth: '0xcE9a2A71dC12F79DF3B30EA1e6355C576E4f632f',
-    },
-  },
+  namedAccounts: envAccounts.getUserNetworkProps(({ address }) => address),
 
   typechain: {
-    outDir: 'artifacts/types',
-    target: 'ethers-v5',
+    outDir: "artifacts/types",
+    target: "ethers-v5",
     alwaysGenerateOverloads: false,
   },
 };
+
+export default config;
